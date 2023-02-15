@@ -6,8 +6,8 @@ This is a Payment Module for Shopware 5, that gives you the ability to process p
 Requirements
 ------------
 
-* Shopware 5 (Tested up to: __5.7.7__)
-* [GenesisPHP v1.20.1](https://github.com/GenesisGateway/genesis_php/releases/tag/1.20.1)
+* Shopware 5 (Tested up to: __5.7.13__)
+* [GenesisPHP v1.21.2](https://github.com/GenesisGateway/genesis_php/releases/tag/1.21.2)
 * PCI-certified server in order to use ```E-Comprocessing Direct```
 
 GenesisPHP Requirements
@@ -24,19 +24,19 @@ GenesisPHP Requirements
 
 Installation (manual) via platform Upload Form
 ---------------------
-* Create **zip** archive - Inside **src** directory zip EComprocessing folder and name the archive **EComprocessing.zip**
+* Create **zip** archive - Inside **src** directory zip Ecomprocessing folder and name the archive **Ecomprocessing.zip**
 * Login inside the __Admin Panel__ and go to ```Configuration``` -> ```Plugin Manager```.
 * Choose ```Installed``` from the left navigation panel and then on the Page with installed extensions choose ```Upload plugin```
-* Choose navigate to the **EComprocessing.zip** and upload it
-* New entry with name **EComprocessing Payment** should appear in section ```Uninstalled```. Click on the plugin and then ```Install``` and ```Activate``` it
+* Choose navigate to the **Ecomprocessing.zip** and upload it
+* New entry with name **Ecomprocessing Payment** should appear in section ```Uninstalled```. Click on the plugin and then ```Install``` and ```Activate``` it
 * During the Activation process, you will be asked for cache clearing. It is required for registering all of the `ecomprocessing` components. Reload the Backend after that (reload the browser page).
 * Go to ```Configuration``` -> ```Payment Methods```. On the page should appear **E-Comprocessing Checkout** and **E-Comprocessing Direct**
 
 Installation (manual) via console
 ---------------------
-* Copy folder **EComprocessing** and its context into **<Your Shopware root folder>\custom\plugins**
+* Copy folder **Ecomprocessing** and its context into **<Your Shopware root folder>\custom\plugins**
 * Navigate to the root folder of your Shopware 5 installation via console and execute the following command 
-    ```php ./bin/console sw:plugin:install EComprocessing```
+    ```php ./bin/console sw:plugin:install Ecomprocessing```
 
 Configuration
 ---------------------
@@ -116,10 +116,12 @@ Supported Transactions
     * __InstaDebit Payin__
     * __InstantTransfer__
     * __Itau__
+    * __Interac Combined Pay-in__
     * __Multibanco__
     * __MyBank__
     * __OnlineBanking__
     * __PayU__
+    * __Pix__
     * __RapiPago__
     * __Post Finance__
     * __PSE__

@@ -1,0 +1,80 @@
+<?xml version="1.0" ?>
+<container xmlns="http://symfony.com/schema/dic/services"
+           xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+           xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
+    <services>
+
+        <service id="ecomprocessing.subscriber.ecomprocessing_resource_subscriber"
+                 class="Ecomprocessing\Subscribers\ResourceSubscriber"
+                 public="true">
+            <argument>%ecomprocessing.plugin_dir%</argument>
+            <tag name="shopware.event_subscriber"/>
+        </service>
+
+        <service id="ecomprocessing.plugin_logger_service"
+                 class="Ecomprocessing\Components\Services\EcomprocessingLogger"
+                 public="true">
+            <argument type="service" id="ecomprocessing.logger"/>
+            <argument type="service" id="ecomprocessing.transform_credit_card_data" />
+        </service>
+
+        <service id="ecomprocessing.genesis_checkout_service"
+                 class="Ecomprocessing\Components\Methods\CheckoutService"
+                 public="true">
+            <argument type="service" id="ecomprocessing.plugin_config_service"/>
+            <argument>%ecomprocessing.plugin_name%</argument>
+            <argument type="service" id="ecomprocessing.plugin_logger_service"/>
+            <argument type="service" id="models"/>
+            <argument type="service" id="ecomprocessing.wpf_tokenization_service"/>
+        </service>
+
+        <service id="ecomprocessing.genesis_direct_service"
+                 class="Ecomprocessing\Components\Methods\DirectService"
+                 public="true">
+            <argument type="service" id="ecomprocessing.plugin_config_service"/>
+            <argument>%ecomprocessing.plugin_name%</argument>
+            <argument type="service" id="ecomprocessing.plugin_logger_service"/>
+            <argument type="service" id="models" />
+        </service>
+
+        <service id="ecomprocessing.shopware_helper_service"
+                 class="Ecomprocessing\Components\Services\ShopwareHelper"
+                 public="true">
+        </service>
+
+        <service id="ecomprocessing.subscribers.ecomprocessing_order_transactions"
+                 class="Ecomprocessing\Subscribers\EcomprocessingOrderTransactions"
+                 public="true">
+            <argument>%ecomprocessing.plugin_dir%</argument>
+            <tag name="shopware.event_subscriber"/>
+        </service>
+
+        <service id="ecomprocessing.subscribers.ecomprocessing_payment_methods"
+                 class="Ecomprocessing\Subscribers\EcomprocessingPaymentMethods"
+                 public="true">
+            <argument>%ecomprocessing.plugin_dir%</argument>
+            <tag name="shopware.event_subscriber"/>
+        </service>
+
+        <service id="ecomprocessing.plugin_config_service"
+                 class="Ecomprocessing\Components\Services\EcomprocessingConfig"
+                 public="true">
+            <argument>%ecomprocessing.plugin_name%</argument>
+            <argument type="service" id="ecomprocessing.plugin_logger_service"/>
+            <argument type="service" id="models" />
+        </service>
+
+        <service id="ecomprocessing.wpf_tokenization_service"
+                 class="Ecomprocessing\Components\Services\WpfTokenizationService"
+                 public="true">
+            <argument type="service" id="models" />
+            <argument type="service" id="ecomprocessing.plugin_logger_service"/>
+        </service>
+
+        <service id="ecomprocessing.transform_credit_card_data"
+                 class="Ecomprocessing\Components\Services\TransformCreditCardData"
+                 public="true">
+        </service>
+
+    </services>
+</container>
