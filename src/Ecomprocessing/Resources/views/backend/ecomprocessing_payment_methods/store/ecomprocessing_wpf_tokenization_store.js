@@ -12,7 +12,7 @@ Ext.define('Shopware.apps.EcomprocessingPaymentMethods.store.EcomprocessingWPFTo
     ],
 
     data: [
-        { option: "{s name=ecomprocessing/config/wpf_tonkenization_yes}Yes{/s}", value: 'yes' },
-        { option: "{s name=ecomprocessing/config/wpf_tonkenization_no}No{/s}", value: 'no' }
+        { option: '{s name="ecomprocessing/config/wpf_tonkenization_yes"}Yes{/s}', value: 'yes' },
+        { option: '{s name="ecomprocessing/config/wpf_tonkenization_no"}No{/s}', value: 'no' }
     ]
 });

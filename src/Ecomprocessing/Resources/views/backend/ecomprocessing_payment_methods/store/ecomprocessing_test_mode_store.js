@@ -12,7 +12,7 @@ Ext.define('Shopware.apps.EcomprocessingPaymentMethods.store.EcomprocessingTestM
     ],
 
     data: [
-        { option: "{s name=ecomprocessing/config/test_mode_yes}Yes{/s}", value: 'yes' },
-        { option: "{s name=ecomprocessing/config/test_mode_no}No{/s}", value: 'no' }
+        { option: '{s name="ecomprocessing/config/test_mode_yes"}Yes{/s}', value: 'yes' },
+        { option: '{s name="ecomprocessing/config/test_mode_no"}No{/s}', value: 'no' }
     ]
 });

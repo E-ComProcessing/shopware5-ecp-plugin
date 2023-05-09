@@ -14,15 +14,15 @@ Ext.define('Shopware.apps.EcomprocessingTransactions.view.detail.Window', {
         var snippets = {
             columns: {
                 id: '{s name="ecomprocessing/detail/id"}Id{/s}',
-                transactionId: '{s name=ecomprocessing/detail/transaction_id}Transaction Id{/s}',
-                uniqueId: '{s name=ecomprocessing/detail/unique_id}Unique Id{/s}',
-                status: '{s name=ecomprocessing/detail/status}Status{/s}',
-                type: '{s name=ecomprocessing/detail/type}Type{/s}',
-                mode: '{s name=ecomprocessing/detail/mode}Mode{/s}',
-                amount: '{s name=ecomprocessing/detail/amount}Amount{/s}',
-                currency: '{s name=ecomprocessing/detail/currency}Currency{/s}',
-                message: '{s name=ecomprocessing/detail/message}Message{/s}',
-                createdAt: '{s name=ecomprocessing/detail/created_at}Created At{/s}',
+                transactionId: '{s name="ecomprocessing/detail/transaction_id"}Transaction Id{/s}',
+                uniqueId: '{s name="ecomprocessing/detail/unique_id"}Unique Id{/s}',
+                status: '{s name="ecomprocessing/detail/status"}Status{/s}',
+                type: '{s name="ecomprocessing/detail/type"}Type{/s}',
+                mode: '{s name="ecomprocessing/detail/mode"}Mode{/s}',
+                amount: '{s name="ecomprocessing/detail/amount"}Amount{/s}',
+                currency: '{s name="ecomprocessing/detail/currency"}Currency{/s}',
+                message: '{s name="ecomprocessing/detail/message"}Message{/s}',
+                createdAt: '{s name="ecomprocessing/detail/created_at"}Created At{/s}',
                 updatedAt: '{s name="ecomprocessing/detail/updated_at"}Updated At{/s}'
             },
             buttons: {
@@ -51,7 +51,7 @@ Ext.define('Shopware.apps.EcomprocessingTransactions.view.detail.Window', {
             var payment = me.record.getPayment().first();
         }
 
-        if (payment && (payment.raw.name === 'ecomprocessing_checkout' || payment.raw.name === 'ecomprocessing_direct')) {
+        if (payment && payment.raw.name === 'ecomprocessing_checkout') {
             var ecomprocessingPanel = Ext.create('Shopware.apps.EcomprocessingTransactions.view.detail.Transactions', {
                 title: 'E-Comprocessing Transactions',
                 record: me.record,

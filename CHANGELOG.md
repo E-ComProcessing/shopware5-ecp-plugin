@@ -1,5 +1,20 @@
 Change Log
 ---------------------
+__1.2.1__
+-----
+* Added Bancontact Bank code to Online banking transaction type
+* Updated Genesis PHP library to version 1.21.6
+
+__1.2.0__
+-----
+* Added support for 3DSv2 params via the ecomprocessing Checkout method
+* Added support for SCA Exemption settings via the ecomprocessing Checkout method
+* Added 3DSv2 parameters handling via Web Payment Form
+* Added SCA Exemption parameters handling via Web Payment Form
+* Updated Genesis PHP library to version 1.21.4
+* Removed ecomprocessing Direct Payment Method
+* Fixed compatibility issue with PHP 8.0 and Shopware 5.7.16
+
 __1.1.2__
 -----
 * Added Pix Transaction Type via Web Payment Form
@@ -44,7 +59,7 @@ __1.0.2__
 
 __1.0.1__
 -----
-* Added new transaction type Post Finance available in the E-Comprocessing Checkout Method
+* Added new transaction type Post Finance available in the Ecomprocessing Checkout Method
 * Allowed reference action Void for the following transaction types:
   * Sale
   * Sale (3D-Secure)

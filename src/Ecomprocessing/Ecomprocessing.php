@@ -52,36 +52,19 @@ class Ecomprocessing extends Plugin
 
         $options = [
             'name' => 'ecomprocessing_checkout',
-            'description' => 'E-Comprocessing Checkout',
+            'description' => 'ecomprocessing Checkout',
             'action' => 'EcomprocessingPayment',
             'active' => 0,
             'position' => 0,
             'additionalDescription' =>
                 '<div><img style="padding: 10px 0 10px 0" ' .
                 'src="custom/plugins/Ecomprocessing/Resources/views/frontend/_public/src/img/ecomprocessing_checkout.png" '.
-                'alt="E-Comprocessing Checkout"></div>' .
+                'alt="ecomprocessing Checkout"></div>' .
                 '<div>' .
-                '<b>E-Comprocessing Checkout</b> offers a secure way to pay for your order, ' .
+                '<b>ecomprocessing Checkout</b> offers a secure way to pay for your order, ' .
                 'using <b>Credit/Debit/Prepaid Card</b> <b>e-Wallet</b> or <b>Vouchers</b>' .
                 '</div>'
         ];
-        $installer->createOrUpdate($context->getPlugin(), $options);
-
-        $options = [
-            'name' => 'ecomprocessing_direct',
-            'description' => 'E-Comprocessing Direct',
-            'action' => 'EcomprocessingPayment',
-            'active' => 0,
-            'position' => 0,
-            'additionalDescription' =>
-                '<div><img style="padding: 10px 0 10px 0" '.
-                'src="custom/plugins/Ecomprocessing/Resources/views/frontend/_public/src/img/ecomprocessing_direct.png" '.
-                'alt="E-Comprocessing Direct"></div>' .
-                '<div>' .
-                '<b>E-Comprocessing Direct</b> offers a secure way to pay for your order, using <b>Credit/Debit Card</b>' .
-                '</div>'
-        ];
-
         $installer->createOrUpdate($context->getPlugin(), $options);
 
         $this->addCustomerAttributes();
@@ -96,6 +79,10 @@ class Ecomprocessing extends Plugin
         $this->addCustomerAttributes();
         $this->addWpfTokenizationOptionDefaults();
         $this->addBankCodeOptionDefaults();
+        $this->addThreedsOptionDefaults();
+        $this->addChallengeIndicatorOptionDefaults();
+        $this->addScaExemptionOptionDefaults();
+        $this->addScaExemptionOptionAmountDefaults();
         $context->scheduleClearCache(InstallContext::CACHE_LIST_DEFAULT);
     }
 
@@ -206,17 +193,6 @@ class Ecomprocessing extends Plugin
                 "VALUES ('${options}', '${optionValues}', '${method}')";
             $this->container->get('dbal_connection')->exec($sql);
         }
-
-        $directConfigs = MethodConfigs::getConfigDirectData();
-        foreach ($directConfigs as $config) {
-            $options      = $config['options'];
-            $optionValues = $config['optionValues'];
-            $method       = $config['methods'];
-
-            $sql = "INSERT IGNORE INTO ecomprocessing_config_methods (options, optionValues, methods) " .
-                "VALUES ('${options}', '${optionValues}', '${method}')";
-            $this->container->get('dbal_connection')->exec($sql);
-        }
     }
 
     /**
@@ -228,7 +204,7 @@ class Ecomprocessing extends Plugin
     {
         try {
             $service = $this->container->get('shopware_attribute.crud_service');
-            $service->delete('s_user_attributes', 'ecp_token_consumer_id');
+            $service->delete('s_user_attributes', 'emp_token_consumer_id');
         } catch (\Exception $exception) {
             $logger = $this->container->get('pluginlogger');
             $logger->debug('Ignore missing user\'s attribute in the DB.');
@@ -244,7 +220,7 @@ class Ecomprocessing extends Plugin
     {
         // Add consumer_id to the Users' record via attribute
         $service = $this->container->get('shopware_attribute.crud_service');
-        $service->update('s_user_attributes', 'ecp_token_consumer_id', 'string');
+        $service->update('s_user_attributes', 'emp_token_consumer_id', 'string');
 
         $this->clearMetaDataCache();
         $this->container->get('models')->generateAttributeModels(['s_user_attributes']);
@@ -289,6 +265,90 @@ class Ecomprocessing extends Plugin
         $options           = $bankCodeConfig['options'];
         $optionValues      = $bankCodeConfig['optionValues'];
         $method            = $bankCodeConfig['methods'];
+        $sql = "INSERT IGNORE INTO ecomprocessing_config_methods (options, optionValues, methods) " .
+            "VALUES ('${options}', '${optionValues}', '${method}')";
+        $this->container->get('dbal_connection')->exec($sql);
+    }
+
+    /**
+     * Add / Update checkout threeds option in Ecomprocessing Database Tables
+     */
+    private function addThreedsOptionDefaults()
+    {
+        $checkoutConfigs          = MethodConfigs::getConfigCheckoutData();
+        $threedsOptionConfigKey   = array_search(
+            'threeds_option',
+            array_column($checkoutConfigs, 'options')
+        );
+
+        $threedsOptionConfig      = $checkoutConfigs[$threedsOptionConfigKey];
+
+        $options      = $threedsOptionConfig['options'];
+        $optionValues = $threedsOptionConfig['optionValues'];
+        $method       = $threedsOptionConfig['methods'];
+        $sql = "INSERT IGNORE INTO ecomprocessing_config_methods (options, optionValues, methods) " .
+            "VALUES ('${options}', '${optionValues}', '${method}')";
+        $this->container->get('dbal_connection')->exec($sql);
+    }
+
+    /**
+     * Add / Update checkout challenge indicator option in Ecomprocessing Database Tables
+     */
+    private function addChallengeIndicatorOptionDefaults()
+    {
+        $checkoutConfigs          = MethodConfigs::getConfigCheckoutData();
+        $challengeIndicatorOptionConfigKey = array_search(
+            'challenge_indicator',
+            array_column($checkoutConfigs, 'options')
+        );
+
+        $challengeIndicatorOptionConfig = $checkoutConfigs[$challengeIndicatorOptionConfigKey];
+
+        $options      = $challengeIndicatorOptionConfig['options'];
+        $optionValues = $challengeIndicatorOptionConfig['optionValues'];
+        $method       = $challengeIndicatorOptionConfig['methods'];
+        $sql = "INSERT IGNORE INTO ecomprocessing_config_methods (options, optionValues, methods) " .
+            "VALUES ('${options}', '${optionValues}', '${method}')";
+        $this->container->get('dbal_connection')->exec($sql);
+    }
+
+    /**
+     * Add / Update Sca Exemption option in Ecomprocessing Database Tables
+     */
+    private function addScaExemptionOptionDefaults()
+    {
+        $checkoutConfigs = MethodConfigs::getConfigCheckoutData();
+        $scaExemptionOptionConfigKey = array_search(
+            'sca_exemption_option',
+            array_column($checkoutConfigs, 'options')
+        );
+
+        $scaExemptionOptionConfig = $checkoutConfigs[$scaExemptionOptionConfigKey];
+
+        $options = $scaExemptionOptionConfig['options'];
+        $optionValues = $scaExemptionOptionConfig['optionValues'];
+        $method = $scaExemptionOptionConfig['methods'];
+        $sql = "INSERT IGNORE INTO ecomprocessing_config_methods (options, optionValues, methods) " .
+            "VALUES ('${options}', '${optionValues}', '${method}')";
+        $this->container->get('dbal_connection')->exec($sql);
+    }
+
+    /**
+     * Add / Update Sca Exemption amount in Ecomprocessing Database Tables
+     */
+    private function addScaExemptionOptionAmountDefaults()
+    {
+        $checkoutConfigs                   = MethodConfigs::getConfigCheckoutData();
+        $scaExemptionAmountConfigKey = array_search(
+            'sca_exemption_amount',
+            array_column($checkoutConfigs, 'options')
+        );
+
+        $scaExemptionAmountConfig    = $checkoutConfigs[$scaExemptionAmountConfigKey];
+
+        $options                           = $scaExemptionAmountConfig['options'];
+        $optionValues                      = $scaExemptionAmountConfig['optionValues'];
+        $method                            = $scaExemptionAmountConfig['methods'];
         $sql = "INSERT IGNORE INTO ecomprocessing_config_methods (options, optionValues, methods) " .
             "VALUES ('${options}', '${optionValues}', '${method}')";
         $this->container->get('dbal_connection')->exec($sql);

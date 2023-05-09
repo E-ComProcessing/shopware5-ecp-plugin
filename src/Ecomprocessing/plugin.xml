@@ -5,7 +5,7 @@
     <label lang="en">ecomprocessing Payment</label>
     <label lang="de">ecomprocessing Payment</label>
 
-    <version>1.1.2</version>
+    <version>1.2.1</version>
     <copyright>(c) E-Comprocessing Ltd.</copyright>
     <license>GNU</license>
     <link>https://e-comprocessing.com</link>
@@ -21,8 +21,7 @@
         <p>
             Contains Following Payment Methods:
             <ul>
-                <li><b>E-Comprocessing Checkout</b></li>
-                <li><b>E-Comprocessing Direct</b></li>
+                <li><b>ecomprocessing Checkout</b></li>
             </ul>
         </p>
         </br>
@@ -47,8 +46,7 @@
         <p>
             Contains Following Payment Methods:
             <ul>
-                <li><b>E-Comprocessing Checkout</b></li>
-                <li><b>E-Comprocessing Direct</b></li>
+                <li><b>ecomprocessing Checkout</b></li>
             </ul>
         </p>
         </br>
@@ -64,6 +62,38 @@
         </table>
         ]]>
     </description>
+
+    <changelog version="1.2.1">
+        <changes lang="en">
+            <![CDATA[
+            <p><b>Features</b>:</p>
+            <div><ul>
+                <li>- Added Bancontact Bank code to Online banking transaction type</li>
+                <li>- Updated Genesis PHP library to version 1.21.6</li>
+            </ul></div>
+            ]]>
+        </changes>
+    </changelog>
+
+    <changelog version="1.2.0">
+        <changes lang="en">
+            <![CDATA[
+            <p><b>Features</b>:</p>
+            <div><ul>
+                <li>- Added support for 3DSv2 params via the ecomprocessing Checkout method</li>
+                <li>- Added support for SCA Exemption settings via the ecomprocessing Checkout method</li>
+                <li>- Added 3DSv2 parameters handling via Web Payment Form</li>
+                <li>- Added SCA Exemption parameters handling via Web Payment Form</li>
+                <li>- Updated Genesis PHP library to version 1.21.4</li>
+                <li>- Removed ecomprocessing Direct Payment Method</li>
+            </ul></div>
+            <p><b>Fixes</b>:</p>
+            <div><ul>
+                <li>- Fixed compatibility issue with PHP 8.0 and Shopware 5.7.16</li>
+            </ul></div>
+            ]]>
+        </changes>
+    </changelog>
 
     <changelog version="1.1.2">
         <changes lang="en">
@@ -83,7 +113,7 @@
             <![CDATA[
             <p><b>Features</b>:</p>
             <div><ul>
-                <li>- Added Bank Code option in the E-Comprocessing Checkout payment config used by Online Banking Transaction Type</li>
+                <li>- Added Bank Code option in the ecomprocessing Checkout payment config used by Online Banking Transaction Type</li>
                 <li>- Tested up to Shopware 5.7.11</li>
             </ul></div>
             ]]>
@@ -159,7 +189,7 @@
             <![CDATA[
             <p><b>Features</b>:</p>
             <div><ul>
-                <li>- Added new transaction type <b>Post Finance</b> available in the <b>E-Comprocessing Checkout Method</b></li>
+                <li>- Added new transaction type <b>Post Finance</b> available in the <b>Ecomprocessing Checkout Method</b></li>
                 <li>- Allowed reference action Void for the following transaction types:
                     <ul>
                         <li>&emsp;<b>Sale</b></li>

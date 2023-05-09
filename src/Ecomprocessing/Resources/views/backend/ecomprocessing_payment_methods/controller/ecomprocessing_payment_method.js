@@ -11,17 +11,15 @@ Ext.define('Shopware.apps.EcomprocessingPaymentMethods.controller.Ecomprocessing
         tabPanel = win.tabPanel
         form = win.generalForm
         ecomprocessingCheckoutForm = win.ecomprocessingCheckoutForm
-        ecomprocessingDirectForm = win.ecomprocessingDirectForm
         ecomprocessingTab = win.ecomprocessingCheckoutForm.up('container').tab;
 
         ecomprocessingTab.hide();
         form.getForm().findField('name').enable();
 
-        if (record.data.name === 'ecomprocessing_checkout' || record.data.name === 'ecomprocessing_direct') {
+        if (record.data.name === 'ecomprocessing_checkout') {
             ecomprocessingTab.show();
             form.getForm().findField('name').disable();
             ecomprocessingCheckoutForm.hide();
-            ecomprocessingDirectForm.hide();
         }
 
         if (record.data.name === 'ecomprocessing_checkout') {
@@ -33,17 +31,6 @@ Ext.define('Shopware.apps.EcomprocessingPaymentMethods.controller.Ecomprocessing
                 me.normalizeBankCodes(checkoutStore);
                 ecomprocessingCheckoutForm.loadRecord(checkoutStore.getAt(0));
                 ecomprocessingCheckoutForm.enable();
-            });
-        }
-
-        if (record.data.name === 'ecomprocessing_direct') {
-            ecomprocessingDirectForm.show();
-            ecomprocessingDirectForm.disable();
-            var directStore = me.getEcpConfigStore('direct');
-            directStore.on('load', function () {
-                me.normalizeTransactionTypes(directStore);
-                ecomprocessingDirectForm.loadRecord(directStore.getAt(0));
-                ecomprocessingDirectForm.enable();
             });
         }
 
@@ -59,17 +46,14 @@ Ext.define('Shopware.apps.EcomprocessingPaymentMethods.controller.Ecomprocessing
             case 'ecomprocessing_checkout':
                 ecomprocessingPanel = win.ecomprocessingCheckoutForm;
                 break;
-            case 'ecomprocessing_direct':
-                ecomprocessingPanel = win.ecomprocessingDirectForm;
-                break;
         }
 
         if (ecomprocessingPanel && ecomprocessingPanel.rendered) {
             if (!ecomprocessingPanel.form.isValid()) {
                 Shopware.Notification.createGrowlMessage(
-                    '{s name=ecomprocessing/config/form/title_failure}Failure{/s}',
+                    '{s name="ecomprocessing/config/form/title_failure"}Failure{/s}',
                     generalForm.getRecord().raw.description +
-                    '{s name=ecomprocessing/config/form/invalid_form} can not be saved. Invalid form data.{/s}',
+                    '{s name="ecomprocessing/config/form/invalid_form"} can not be saved. Invalid form data.{/s}',
                     'ecomprocessing'
                 );
             }
@@ -84,10 +68,10 @@ Ext.define('Shopware.apps.EcomprocessingPaymentMethods.controller.Ecomprocessing
                     },
                     failure: function(form, action) {
                         var message = generalForm.getRecord().raw.description +
-                            '{s name=ecomprocessing/config/form/error_save} error during form save.{/s} '
+                            '{s name="ecomprocessing/config/form/error_save"} error during form save.{/s} '
                             + action.result.message;
                         Shopware.Notification.createGrowlMessage(
-                            '{s name=ecomprocessing/config/form/title_failure}Failure{/s}',
+                            '{s name="ecomprocessing/config/form/title_failure"}Failure{/s}',
                             message,
                             'ecomprocessing'
                         );

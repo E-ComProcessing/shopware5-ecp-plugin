@@ -15,7 +15,6 @@
                  class="Ecomprocessing\Components\Services\EcomprocessingLogger"
                  public="true">
             <argument type="service" id="ecomprocessing.logger"/>
-            <argument type="service" id="ecomprocessing.transform_credit_card_data" />
         </service>
 
         <service id="ecomprocessing.genesis_checkout_service"
@@ -26,15 +25,7 @@
             <argument type="service" id="ecomprocessing.plugin_logger_service"/>
             <argument type="service" id="models"/>
             <argument type="service" id="ecomprocessing.wpf_tokenization_service"/>
-        </service>
-
-        <service id="ecomprocessing.genesis_direct_service"
-                 class="Ecomprocessing\Components\Methods\DirectService"
-                 public="true">
-            <argument type="service" id="ecomprocessing.plugin_config_service"/>
-            <argument>%ecomprocessing.plugin_name%</argument>
-            <argument type="service" id="ecomprocessing.plugin_logger_service"/>
-            <argument type="service" id="models" />
+            <argument type="service" id="ecomprocessing.threeds_service"/>
         </service>
 
         <service id="ecomprocessing.shopware_helper_service"
@@ -71,8 +62,16 @@
             <argument type="service" id="ecomprocessing.plugin_logger_service"/>
         </service>
 
-        <service id="ecomprocessing.transform_credit_card_data"
-                 class="Ecomprocessing\Components\Services\TransformCreditCardData"
+        <service id="ecomprocessing.threeds_service"
+                 class="Ecomprocessing\Components\Services\ThreedsService"
+                 public="true">
+            <argument type="service" id="customer_search.dbal.indexing.provider"/>
+            <argument type="service" id="ecomprocessing.threeds_indicator_service"/>
+            <argument type="service" id="models" />
+        </service>
+
+        <service id="ecomprocessing.threeds_indicator_service"
+                 class="Ecomprocessing\Components\Services\ThreedsIndicatorService"
                  public="true">
         </service>
 

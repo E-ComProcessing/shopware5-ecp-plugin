@@ -45,19 +45,12 @@ final class EcomprocessingLogger
     private $shopwareLogger;
 
     /**
-     * @var TransformCreditCardData $creditCardDataTransformer
-     */
-    private $creditCardDataTransformer;
-
-    /**
      * EcomprocessingLogger constructor.
      * @param Logger $pluginLogger
-     * @param $creditCardDataTransformer
      */
-    public function __construct(Logger $pluginLogger, $creditCardDataTransformer)
+    public function __construct(Logger $pluginLogger)
     {
-        $this->shopwareLogger             = $pluginLogger;
-        $this->creditCardDataTransformer  = $creditCardDataTransformer;
+        $this->shopwareLogger = $pluginLogger;
     }
 
     /**
@@ -95,7 +88,7 @@ final class EcomprocessingLogger
             $arguments[2] = [];
         }
 
-        $this->shopwareLogger->{$name}($message, $this->filterParams($arguments[2]));
+        $this->shopwareLogger->{$name}($message, $arguments[2]);
     }
 
     /**
@@ -106,16 +99,5 @@ final class EcomprocessingLogger
     public function getLoggerInstance()
     {
         return $this->shopwareLogger;
-    }
-
-    /**
-     * Filter or mask params for logging
-     *
-     * @param array $params
-     * @return array
-     */
-    protected function filterParams($params)
-    {
-        return $this->creditCardDataTransformer->call($params);
     }
 }

@@ -6,8 +6,8 @@ This is a Payment Module for Shopware 5, that gives you the ability to process p
 Requirements
 ------------
 
-* Shopware 5 (Tested up to: __5.7.13__)
-* [GenesisPHP v1.21.2](https://github.com/GenesisGateway/genesis_php/releases/tag/1.21.2)
+* Shopware 5 (Tested up to: __5.7.16__)
+* [GenesisPHP v1.21.6](https://github.com/GenesisGateway/genesis_php/releases/tag/1.21.6)
 * PCI-certified server in order to use ```E-Comprocessing Direct```
 
 GenesisPHP Requirements
@@ -30,7 +30,7 @@ Installation (manual) via platform Upload Form
 * Choose navigate to the **Ecomprocessing.zip** and upload it
 * New entry with name **Ecomprocessing Payment** should appear in section ```Uninstalled```. Click on the plugin and then ```Install``` and ```Activate``` it
 * During the Activation process, you will be asked for cache clearing. It is required for registering all of the `ecomprocessing` components. Reload the Backend after that (reload the browser page).
-* Go to ```Configuration``` -> ```Payment Methods```. On the page should appear **E-Comprocessing Checkout** and **E-Comprocessing Direct**
+* Go to ```Configuration``` -> ```Payment Methods```. On the page should appear **ecomprocessing Checkout** and **ecomprocessing Direct**
 
 Installation (manual) via console
 ---------------------
@@ -40,8 +40,8 @@ Installation (manual) via console
 
 Configuration
 ---------------------
-* Activate the plugin `Configuration` -> `Payment Methods`. Choose `E-Comprocessing Checkout` or `E-Comprocessing Direct` and check `Active`
-* Configure the Plugin Settings. Choose `Configuration` -> `Payment Methods`. Choose `E-Comprocessing Checkout` or `E-Comprocessing Direct`. Click on `ecomprocessing Config` tab and fill up the form. After that click on `Save`
+* Activate the plugin `Configuration` -> `Payment Methods`. Choose `ecomprocessing Checkout` or `ecomprocessing Direct` and check `Active`
+* Configure the Plugin Settings. Choose `Configuration` -> `Payment Methods`. Choose `ecomprocessing Checkout` or `ecomprocessing Direct`. Click on `ecomprocessing Config` tab and fill up the form. After that click on `Save`
 * Enable Phone number. `Configuration` -> `Basic Settings`. Expand `Frontend` and choose `Login / registration`. Locate `Treat phone number as required` and set `Yes`, locate `Show phone number field` and set `Yes`. Click `Save`. This will allow your new customer to fill in a phone number on the registration page.
 * Add Phone number to existing customers. `Customers` -> `Customers`. Edit the desired customer. Choose `Addresses` edit the desired address and fill in up the `Phone`
 
@@ -53,11 +53,6 @@ When uninstalling, a message will appear asking if the plug-in data needs to be 
 
 Supported Transactions
 ---------------------
-* ```E-Comprocessing Direct``` Payment Method
-	* __Authorize__
-	* __Authorize (3D-Secure)__
-	* __Sale__
-	* __Sale (3D-Secure)__
 
 * ```E-Comprocessing Checkout``` Payment Method
   * __Alternative Payment Methods__
@@ -105,6 +100,7 @@ Supported Transactions
     * __SDD Sale__
   * __Online Banking Payments__
     * __Banco do Brasil__
+    * __Bancontact__
     * __Bancomer__
     * __Bradesco__
     * __Davivienda__

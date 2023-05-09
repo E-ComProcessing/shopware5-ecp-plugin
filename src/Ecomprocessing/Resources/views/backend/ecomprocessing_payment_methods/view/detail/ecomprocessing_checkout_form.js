@@ -4,7 +4,7 @@
 
 Ext.define('Shopware.apps.EcomprocessingPaymentMethods.view.detail.EcomprocessingCheckoutForm', {
     extend: 'Ext.form.Panel',
-    title: 'E-Comprocessing Checkout Config',
+    title: 'ecomprocessing Checkout Config',
     autoShow: false,
     alias : 'widget.ecomprocessing-payment-checkout-formpanel',
     region: 'center',
@@ -21,11 +21,11 @@ Ext.define('Shopware.apps.EcomprocessingPaymentMethods.view.detail.Ecomprocessin
     },
     autoSync: true,
 
-    initComponent: function() {
+    initComponent: function () {
         var me = this;
 
         this.ecomprocessingFieldset = Ext.create('Ext.form.FieldSet', {
-            title: '{s name="ecomprocessing/config/checkout/form_title"}E-Comprocessing Checkout Config{/s}',
+            title: '{s name="ecomprocessing/config/checkout/form_title"}ecomprocessing Checkout Config{/s}',
             anchor: '100%',
             defaults: {
                 anchor: '100%',
@@ -39,11 +39,11 @@ Ext.define('Shopware.apps.EcomprocessingPaymentMethods.view.detail.Ecomprocessin
         me.callParent(arguments);
     },
 
-    getCheckoutItems: function() {
+    getCheckoutItems: function () {
         return [
             {
                 xtype: 'combobox',
-                fieldLabel: '{s name=ecomprocessing/config/checkout/test_mode}Test Mode{/s}',
+                fieldLabel: '{s name="ecomprocessing/config/checkout/test_mode"}Test Mode{/s}',
                 name: 'test_mode',
                 translatable: false,
                 store: Ext.create('Shopware.apps.EcomprocessingPaymentMethods.store.EcomprocessingTestModeStore'),
@@ -51,24 +51,24 @@ Ext.define('Shopware.apps.EcomprocessingPaymentMethods.view.detail.Ecomprocessin
                 valueField: 'value',
                 value: 'no',
                 allowBlank: false
-            },
+        },
             {
                 xtype: 'textfield',
-                fieldLabel: '{s name=ecomprocessing/config/checkout/username}Username{/s}',
+                fieldLabel: '{s name="ecomprocessing/config/checkout/username"}Username{/s}',
                 name: 'username',
                 translatable: false,
                 allowBlank: false
-            },
+        },
             {
                 xtype: 'textfield',
-                fieldLabel: '{s name=ecomprocessing/config/checkout/password}Password{/s}',
+                fieldLabel: '{s name="ecomprocessing/config/checkout/password"}Password{/s}',
                 name: 'password',
                 translatable: false,
                 allowBlank: false
-            },
+        },
             {
                 xtype: 'combobox',
-                fieldLabel: '{s name=ecomprocessing/config/checkout/transaction_types}Transaction Types{/s}',
+                fieldLabel: '{s name="ecomprocessing/config/checkout/transaction_types"}Transaction Types{/s}',
                 name: 'transaction_types[]',
                 translatable: false,
                 store: Ext.create('Shopware.apps.EcomprocessingPaymentMethods.store.EcomprocessingCheckoutTransactionTypesStore').load(),
@@ -77,17 +77,17 @@ Ext.define('Shopware.apps.EcomprocessingPaymentMethods.view.detail.Ecomprocessin
                 value: [ 'sale', 'authorize', 'sale3d', 'authorize3d' ],
                 multiSelect: true,
                 allowBlank: false
-            },
+        },
             {
                 xtype: 'combobox',
-                getSubmitValue: function(){
+                getSubmitValue: function () {
                     let value = this.getValue();
-                    if(Ext.isEmpty(value)) {
+                    if (Ext.isEmpty(value)) {
                         return '';
                     }
                     return value;
                 },
-                fieldLabel: '{s name=ecomprocessing/config/checkout/bank_codes}Bank codes for Online banking{/s}',
+                fieldLabel: '{s name="ecomprocessing/config/checkout/bank_codes"}Bank codes for Online banking{/s}',
                 name: 'bank_codes[]',
                 translatable: false,
                 store: Ext.create('Shopware.apps.EcomprocessingPaymentMethods.store.EcomprocessingCheckoutBankCodesStore').load(),
@@ -96,10 +96,10 @@ Ext.define('Shopware.apps.EcomprocessingPaymentMethods.view.detail.Ecomprocessin
                 value: [],
                 multiSelect: true,
                 allowBlank: true
-            },
+        },
             {
                 xtype: 'combobox',
-                fieldLabel: '{s name=ecomprocessing/config/checkount/checkout_language}Checkout Language{/s}',
+                fieldLabel: '{s name="ecomprocessing/config/checkount/checkout_language"}Checkout Language{/s}',
                 name: 'checkout_language',
                 translatable: false,
                 store: Ext.create('Shopware.apps.EcomprocessingPaymentMethods.store.EcomprocessingCheckoutLanguagesStore').load(),
@@ -107,10 +107,10 @@ Ext.define('Shopware.apps.EcomprocessingPaymentMethods.view.detail.Ecomprocessin
                 valueField: 'value',
                 value: 'en',
                 allowBlank: false
-            },
+        },
             {
                 xtype: 'combobox',
-                fieldLabel: '{s name=ecomprocessing/config/checkout/wpf_tokenization}WPF Tokenization{/s}',
+                fieldLabel: '{s name="ecomprocessing/config/checkout/wpf_tokenization"}WPF Tokenization{/s}',
                 name: 'wpf_tokenization',
                 translatable: false,
                 store: Ext.create('Shopware.apps.EcomprocessingPaymentMethods.store.EcomprocessingWPFTokenizationStore'),
@@ -118,12 +118,55 @@ Ext.define('Shopware.apps.EcomprocessingPaymentMethods.view.detail.Ecomprocessin
                 valueField: 'value',
                 value: 'no',
                 allowBlank: false
-            },
+        },
+            {
+                xtype: 'combobox',
+                fieldLabel: '{s name="ecomprocessing/config/checkout/threeds_option"}3DSv2{/s}',
+                name: 'threeds_option',
+                translatable: false,
+                store: Ext.create('Shopware.apps.EcomprocessingPaymentMethods.store.EcomprocessingCheckoutThreedsOptionStore'),
+                displayField: 'option',
+                valueField: 'value',
+                value: 'yes',
+                allowBlank: false
+        },
+            {
+                xtype: 'combobox',
+                fieldLabel: '{s name="ecomprocessing/config/checkout/challenge_indicator"}Challenge Indicator{/s}',
+                name: 'challenge_indicator',
+                translatable: false,
+                store: Ext.create('Shopware.apps.EcomprocessingPaymentMethods.store.EcomprocessingCheckoutChallengeIndicatorOptionStore'),
+                displayField: 'option',
+                valueField: 'value',
+                value: 'no_preference',
+                allowBlank: false
+        },
+            {
+                xtype: 'combobox',
+                fieldLabel: '{s name="ecomprocessing/config/checkout/sca_exemption_option"}SCA Exemption option{/s}',
+                name: 'sca_exemption_option',
+                translatable: false,
+                store: Ext.create('Shopware.apps.EcomprocessingPaymentMethods.store.EcomprocessingCheckoutScaExemptionOptionStore'),
+                displayField: 'option',
+                valueField: 'value',
+                value: 'low_risk',
+                allowBlank: false
+        },
+            {
+                xtype: 'numberfield',
+                fieldLabel: '{s name="ecomprocessing/config/checkout/sca_exemption_amount"}SCA Exemption amount{/s}',
+                name: 'sca_exemption_amount',
+                translatable: false,
+                store: Ext.create('Shopware.apps.EcomprocessingPaymentMethods.store.EcomprocessingCheckoutScaExemptionAmountStore'),
+                minValue: 0,
+                value: 100,
+                allowBlank: true
+        },
             {
                 xtype: 'hiddenfield',
                 name: 'method',
                 value: 'checkout'
-            }
+        }
         ];
     }
 });

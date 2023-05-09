@@ -21,7 +21,6 @@ use Ecomprocessing\Components\Constants\ReferenceActionAttributes as ActionAttri
 use Ecomprocessing\Components\Constants\SdkSettingKeys;
 use Ecomprocessing\Components\Helpers\TransactionTree;
 use Ecomprocessing\Components\Methods\CheckoutService;
-use Ecomprocessing\Components\Methods\DirectService;
 use Ecomprocessing\Components\Services\EcomprocessingConfig;
 use Genesis\API\Constants\Transaction\States;
 use Genesis\API\Constants\Transaction\Types;
@@ -120,11 +119,6 @@ class Shopware_Controllers_Backend_EcomprocessingReferenceTransaction extends Sh
             if ($actionTransaction->getPaymentMethod() === CheckoutService::METHOD_CHECKOUT) {
                 /** @var CheckoutService $sdkService */
                 $sdkService = $this->container->get('ecomprocessing.genesis_checkout_service');
-            }
-
-            if ($actionTransaction->getPaymentMethod() === DirectService::METHOD_DIRECT) {
-                /** @var DirectService $sdkService */
-                $sdkService = $this->container->get('ecomprocessing.genesis_direct_service');
             }
 
             if (!isset($sdkService)) {

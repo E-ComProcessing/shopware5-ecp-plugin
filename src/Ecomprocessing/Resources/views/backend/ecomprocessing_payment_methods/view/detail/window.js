@@ -16,12 +16,11 @@ Ext.define('Shopware.apps.EcomprocessingPaymentMethods.view.detail.Window', {
         };
 
         me.ecomprocessingCheckoutForm = Ext.create('Shopware.apps.EcomprocessingPaymentMethods.view.detail.EcomprocessingCheckoutForm');
-        me.ecomprocessingDirectForm = Ext.create('Shopware.apps.EcomprocessingPaymentMethods.view.detail.EcomprocessingDirectForm');
 
         result.add([{
             xtype: 'container',
             autoRender: true,
-            title: '{s name=ecomprocessing/config/title}ecomprocessing Config{/s}',
+            title: '{s name="ecomprocessing/config/title"}ecomprocessing Config{/s}',
             name: 'ecomprocessing-config',
             hidden: true,
             layout: 'fit',
@@ -32,7 +31,7 @@ Ext.define('Shopware.apps.EcomprocessingPaymentMethods.view.detail.Window', {
             defaults: {
                 layout: 'fit'
             },
-            items: [me.ecomprocessingCheckoutForm, me.ecomprocessingDirectForm]
+            items: [me.ecomprocessingCheckoutForm]
         }]);
 
         return result;

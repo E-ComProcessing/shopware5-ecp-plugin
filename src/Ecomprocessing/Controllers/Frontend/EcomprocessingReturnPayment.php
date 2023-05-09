@@ -19,7 +19,6 @@
 
 use Ecomprocessing\Components\Constants\EcomprocessingPaymentAttributes;
 use Ecomprocessing\Components\Methods\CheckoutService;
-use Ecomprocessing\Components\Methods\DirectService;
 use Ecomprocessing\Controllers\Base\FrontendPaymentAction;
 use Shopware\Components\CSRFWhitelistAware;
 
@@ -207,12 +206,6 @@ class Shopware_Controllers_Frontend_EcomprocessingReturnPayment extends Frontend
             $sdkService = $this->container->get('ecomprocessing.genesis_checkout_service');
         }
 
-        if (array_key_exists('unique_id', $this->request->getParams())) {
-            // Load Processing SDK
-            /** @var DirectService $sdkService */
-            $sdkService = $this->container->get('ecomprocessing.genesis_direct_service');
-        }
-
         if (!isset($sdkService)) {
             $errorMessage = 'Error during loading the ecomprocessing Method Service';
             $this->logger->error(
@@ -251,9 +244,7 @@ class Shopware_Controllers_Frontend_EcomprocessingReturnPayment extends Frontend
             die();
         } catch (\Exception $e) {
             $method = 'notification';
-            if (isset($sdkService) &&
-                ($sdkService instanceof CheckoutService || $sdkService instanceof DirectService)
-            ) {
+            if (isset($sdkService) && ($sdkService instanceof CheckoutService)) {
                 $method = $sdkService->getMethod();
             }
 

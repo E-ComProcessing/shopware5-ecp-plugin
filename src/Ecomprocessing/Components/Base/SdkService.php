@@ -61,7 +61,10 @@ abstract class SdkService
      * Available Methods
      */
     const METHOD_CHECKOUT = 'checkout';
-    const METHOD_DIRECT   = 'direct';
+    /**
+     * Threeds option value
+     */
+    const THREEDS_OPTION_ENABLED = 'yes';
 
     /**
      * Ecomprocessing Plugin Config Service
@@ -116,8 +119,8 @@ abstract class SdkService
     protected $shopwareCustomerNumber;
 
     /**
-     * Get the Method Instance (Checkout/Direct)
-     *      Possible values ecomprocessing_checkout, ecomprocessing_direct
+     * Get the Method Instance (Checkout)
+     *      Possible values ecomprocessing_checkout
      *
      * @return Genesis
      */
@@ -275,12 +278,6 @@ abstract class SdkService
             $this->genesis = new Genesis('WPF\Create');
         }
 
-        if ($this->getMethod() == self::METHOD_DIRECT) {
-            $this->genesis = new Genesis(
-                Types::getFinancialRequestClassForTrxType($this->getConfig()[SdkSettingKeys::TRANSACTION_TYPES][0])
-            );
-        }
-
         return $this->genesis;
     }
 
@@ -387,10 +384,6 @@ abstract class SdkService
         );
         Config::setUsername($config[SdkSettingKeys::USERNAME]);
         Config::setPassword($config[SdkSettingKeys::PASSWORD]);
-
-        if ($this->getMethod() == self::METHOD_DIRECT) {
-            Config::setToken($config[SdkSettingKeys::TOKEN]);
-        }
     }
 
     /**
@@ -698,6 +691,7 @@ abstract class SdkService
     {
         return [
             Banks::CPI => 'Interac Combined Pay-in',
+            Banks::BCT => 'Bancontact',
         ];
     }
 }
